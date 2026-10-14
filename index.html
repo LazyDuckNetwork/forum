@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forum & Dyskusje — LazyDuck Network</title>
+  <meta name="description" content="Oficjalne forum i miejsce dyskusji społeczności LazyDuck Network.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #080808;
+      color: #e0e0e0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* NAGŁÓWEK W STYLU DISCORDA */
+    header {
+      background: #0c0c0f;
+      border-bottom: 1px solid #1f1f26;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .brand span {
+      font-size: 1.3rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .nav-link {
+      color: #b9bbbe;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #ffee00;
+    }
+
+    .back-link {
+      color: #ffee00;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      opacity: 0.8;
+    }
+
+    /* KONTENER IFRAME */
+    .forum-wrapper {
+      flex-grow: 1;
+      position: relative;
+      background: #080808;
+      display: flex;
+      flex-direction: column;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #ffffff;
+    }
+
+    /* ZAPASOWY EKRAN W RAZIE BLOKOWANIA PRZEZ GITHUB */
+    .fallback-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #080808;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      z-index: 1;
+      pointer-events: none; /* Pozwala klikać w iframe, jeśli się załaduje */
+    }
+
+    /* Ukrywamy fallback, jeśli iframe zadziała, ale dajemy ładny przycisk pod spodem */
+    .fallback-box {
+      background: #0d0d12;
+      border: 1px solid #1f1f28;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 500px;
+      pointer-events: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .fallback-box h3 {
+      color: #ffee00;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .fallback-box p {
+      color: #8e8e93;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .direct-btn {
+      display: inline-block;
+      background: #ffee00;
+      color: #000000;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 0 15px rgba(255, 238, 0, 0.2);
+    }
+
+    .direct-btn:hover {
+      background: #ffcc00;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(255, 238, 0, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAGŁÓWEK -->
+  <header>
+    <a href="https://lazyducknetwork.github.io/docs" class="brand">
+      <span>🦆</span> LazyDuck Network &bull; Forum Społeczności
+    </a>
+    <div class="nav-links">
+      <a href="https://lazyducknetwork.github.io/docs" class="nav-link">Dokumentacja</a>
+      <a href="https://lazyducknetwork.github.io/fonts" class="nav-link">Font Generator</a>
+      <a href="https://lazyducknetwork.github.io/docs" class="back-link">← Powrót</a>
+    </div>
+  </header>
+
+  <!-- GŁÓWNA TREŚĆ Z RAMKĄ -->
+  <div class="forum-wrapper">
+    
+    <!-- Zapasowy kafelek informacyjny (wyświetli się tylko w razie restrykcji GitHub Pages / X-Frame) -->
+    <div class="fallback-layer" id="fallbackLayer">
+      <div class="fallback-box">
+        <h3>💬 Sekcja Dyskusji GitHub</h3>
+        <p>Przeglądarka lub polityka bezpieczeństwa GitHub może ograniczać osadzanie dyskusji wewnątrz ramki. Możesz przejść bezpośrednio do pełnego widoku dyskusji organizacji:</p>
+        <a href="https://github.com/orgs/LazyDuckNetwork/discussions" target="_blank" class="direct-btn">Otwórz Forum na GitHubie →</a>
+      </div>
+    </div>
+
+    <!-- Ramka ładująca dyskusje przedstawione w panelu organizacji[cite: 5] -->
+    <iframe src="https://github.com/orgs/LazyDuckNetwork/discussions" title="LazyDuck Forum & Discussions" onload="document.getElementById('fallbackLayer').style.display='none';"></iframe>
+
+  </div>
+
+</body>
+
+</html>

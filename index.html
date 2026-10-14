@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forum & Dyskusje — LazyDuck Network</title>
-  <meta name="description" content="Oficjalne forum i miejsce dyskusji społeczności LazyDuck Network.">
+  <meta name="description" content="Oficjalne forum i centrum dyskusji społeczności LazyDuck Network.">
 
   <style>
     * {
@@ -18,35 +18,34 @@
       background-color: #080808;
       color: #e0e0e0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      justify-content: space-between;
     }
 
-    /* NAGŁÓWEK W STYLU DISCORDA */
+    /* NAGŁÓWEK */
     header {
       background: #0c0c0f;
       border-bottom: 1px solid #1f1f26;
-      padding: 14px 24px;
+      padding: 16px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-shrink: 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       color: #ffffff;
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 1.05rem;
     }
 
     .brand span {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
 
     .nav-links {
@@ -76,81 +75,120 @@
       opacity: 0.8;
     }
 
-    /* KONTENER IFRAME */
-    .forum-wrapper {
+    /* MAIN CONTENT */
+    main {
+      max-width: 900px;
+      width: 100%;
+      margin: 50px auto;
+      padding: 0 20px;
       flex-grow: 1;
-      position: relative;
-      background: #080808;
-      display: flex;
-      flex-direction: column;
     }
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: #ffffff;
-    }
-
-    /* ZAPASOWY EKRAN W RAZIE BLOKOWANIA PRZEZ GITHUB */
-    .fallback-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #080808;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    .hero {
       text-align: center;
-      padding: 20px;
-      z-index: 1;
-      pointer-events: none; /* Pozwala klikać w iframe, jeśli się załaduje */
+      margin-bottom: 40px;
     }
 
-    /* Ukrywamy fallback, jeśli iframe zadziała, ale dajemy ładny przycisk pod spodem */
-    .fallback-box {
-      background: #0d0d12;
-      border: 1px solid #1f1f28;
-      padding: 30px;
+    .hero h1 {
+      color: #ffee00;
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(255, 238, 0, 0.2);
+    }
+
+    .hero p {
+      color: #8e8e93;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #121218 0%, #0d0d12 100%);
+      border: 1px solid #222230;
       border-radius: 16px;
-      max-width: 500px;
-      pointer-events: auto;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 40px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    .fallback-box h3 {
-      color: #ffee00;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffee00;
+      color: #000000;
+      padding: 12px 28px;
+      border-radius: 24px;
+      font-weight: bold;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 20px rgba(255, 238, 0, 0.25);
+      margin-top: 20px;
     }
 
-    .fallback-box p {
+    .cta-btn:hover {
+      background: #ffcc00;
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 238, 0, 0.4);
+    }
+
+    /* KATEGORIE GRID */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .category-card {
+      background: #0d0d12;
+      border: 1px solid #1f1f28;
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .category-card:hover {
+      border-color: #ffee00;
+      transform: translateY(-3px);
+      background: #121219;
+    }
+
+    .category-icon {
+      font-size: 1.5rem;
+    }
+
+    .category-title {
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .category-desc {
       color: #8e8e93;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
+      font-size: 0.85rem;
       line-height: 1.4;
     }
 
-    .direct-btn {
-      display: inline-block;
-      background: #ffee00;
-      color: #000000;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.2s;
-      box-shadow: 0 0 15px rgba(255, 238, 0, 0.2);
+    /* FOOTER */
+    footer {
+      background: #0c0c0f;
+      border-top: 1px solid #1f1f26;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #72767d;
     }
 
-    .direct-btn:hover {
-      background: #ffcc00;
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(255, 238, 0, 0.4);
+    footer a {
+      color: #ffee00;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -160,7 +198,7 @@
   <!-- NAGŁÓWEK -->
   <header>
     <a href="https://lazyducknetwork.github.io/docs" class="brand">
-      <span>🦆</span> LazyDuck Network &bull; Forum Społeczności
+      <span>🦆</span> LazyDuck Network &bull; Forum
     </a>
     <div class="nav-links">
       <a href="https://lazyducknetwork.github.io/docs" class="nav-link">Dokumentacja</a>
@@ -169,22 +207,53 @@
     </div>
   </header>
 
-  <!-- GŁÓWNA TREŚĆ Z RAMKĄ -->
-  <div class="forum-wrapper">
-    
-    <!-- Zapasowy kafelek informacyjny (wyświetli się tylko w razie restrykcji GitHub Pages / X-Frame) -->
-    <div class="fallback-layer" id="fallbackLayer">
-      <div class="fallback-box">
-        <h3>💬 Sekcja Dyskusji GitHub</h3>
-        <p>Przeglądarka lub polityka bezpieczeństwa GitHub może ograniczać osadzanie dyskusji wewnątrz ramki. Możesz przejść bezpośrednio do pełnego widoku dyskusji organizacji:</p>
-        <a href="https://github.com/orgs/LazyDuckNetwork/discussions" target="_blank" class="direct-btn">Otwórz Forum na GitHubie →</a>
-      </div>
+  <!-- TREŚĆ GŁÓWNA -->
+  <main>
+    <div class="hero">
+      <h1>💬 Centrum Społeczności i Dyskusji</h1>
+      <p>Dołącz do rozmów, zadawaj pytania, dziel się pomysłami i śledź najnowsze ogłoszenia.</p>
     </div>
 
-    <!-- Ramka ładująca dyskusje przedstawione w panelu organizacji[cite: 5] -->
-    <iframe src="https://github.com/orgs/LazyDuckNetwork/discussions" title="LazyDuck Forum & Discussions" onload="document.getElementById('fallbackLayer').style.display='none';"></iframe>
+    <div class="cta-box">
+      <h3 style="color: #ffffff; font-size: 1.3rem; margin-bottom: 8px;">Oficjalne Forum Organizacji</h3>
+      <p>Ze względów bezpieczeństwa GitHub dyskusje są hostowane w dedykowanym widoku[cite: 5]. Kliknij poniżej, aby przejść bezpośrednio do pełnej tablicy dyskusji:</p>
+      <a href="https://github.com/orgs/LazyDuckNetwork/discussions" target="_blank" class="cta-btn">
+        Otwórz Dyskusje na GitHubie →
+      </a>
+    </div>
 
-  </div>
+    <!-- KATEGORIE SKRÓTÓW -->
+    <div class="categories-grid">
+      <a href="https://github.com/orgs/LazyDuckNetwork/discussions/categories/announcements" target="_blank" class="category-card">
+        <span class="category-icon">📢</span>
+        <div class="category-title">Ogłoszenia</div>
+        <div class="category-desc">Oficjalne wiadomości, aktualizacje projektów i ogłoszenia od zespołu.</div>
+      </a>
+
+      <a href="https://github.com/orgs/LazyDuckNetwork/discussions/categories/general" target="_blank" class="category-card">
+        <span class="category-icon">💬</span>
+        <div class="category-title">Ogólne</div>
+        <div class="category-desc">Swobodne rozmowy na każdy temat związany z technologią i studiem.</div>
+      </a>
+
+      <a href="https://github.com/orgs/LazyDuckNetwork/discussions/categories/ideas" target="_blank" class="category-card">
+        <span class="category-icon">💡</span>
+        <div class="category-title">Pomysły</div>
+        <div class="category-desc">Masz wizję nowej funkcji lub projektu? Podziel się nią z nami!</div>
+      </a>
+
+      <a href="https://github.com/orgs/LazyDuckNetwork/discussions/categories/q-a" target="_blank" class="category-card">
+        <span class="category-icon">❓</span>
+        <div class="category-title">Pytania i Odpowiedzi</div>
+        <div class="category-desc">Potrzebujesz pomocy lub wyjaśnienia technicznego? Zadaj pytanie.</div>
+      </a>
+    </div>
+  </main>
+
+  <!-- STOPKA -->
+  <footer>
+    © 2026 LazyDuck Network. Twórca: <strong style="color: #ff8800;">Ewewerban</strong> • <a href="https://buycoffee.to/ewewerban" target="_blank">Postaw kawę ☕</a>
+  </footer>
 
 </body>
 
